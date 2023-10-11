@@ -13,3 +13,16 @@
 
 # Dependency directories (remove the comment below to include it)
 # vendor/
+.DS_Store
+.idea
+build
+dist
+target
+
+/.bundle/
+/.yardoc
+/_yardoc/
+/coverage/
+/spec/reports/
+/tmp/
+

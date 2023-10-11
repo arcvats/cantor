@@ -1,0 +1,3 @@
+module Cantor
+    VERSION: String
+end
