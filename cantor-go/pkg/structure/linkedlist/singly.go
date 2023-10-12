@@ -15,8 +15,9 @@ func NewNode[T any](value T) *Node[T] {
 	return &Node[T]{value: value, next: nil}
 }
 
-func NewSingly[T any]() Singly[T] {
-	return Singly[T]{head: nil, tail: nil, size: 0}
+// NewSingly creates a new singly linked list
+func NewSingly[T any]() *Singly[T] {
+	return &Singly[T]{head: nil, tail: nil, size: 0}
 }
 
 func (list *Singly[T]) Size() uint {
@@ -49,4 +50,41 @@ func (list *Singly[T]) Prepend(value T) {
 		list.head = newNode
 	}
 	list.size++
+}
+
+func (list *Singly[T]) Destroy() {
+	list.head = nil
+	list.tail = nil
+	list.size = 0
+}
+
+func (list *Singly[T]) DeleteFirst() any {
+	if list.IsEmpty() {
+		return nil
+	}
+	if list.Size() == 1 {
+		list.tail = nil
+	}
+	value := list.head.value
+	list.head = list.head.next
+	list.size--
+	return value
+}
+
+func (list *Singly[T]) DeleteLast() any {
+	if list.IsEmpty() {
+		return nil
+	}
+	if list.Size() == 1 {
+		return list.DeleteFirst()
+	}
+	value := list.tail.value
+	current := list.head
+	for current.next.next != nil {
+		current = current.next
+	}
+	current.next = nil
+	list.tail = current
+	list.size--
+	return value
 }

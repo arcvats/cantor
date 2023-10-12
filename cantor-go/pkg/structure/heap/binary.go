@@ -14,41 +14,42 @@ type UnsignedInteger interface {
 	uint | uint8 | uint16 | uint32 | uint64
 }
 
-type MinHeap[T any] struct {
+type BinaryHeap[T any] struct {
 	elements   []T
 	comparable func(a, b T) bool
-	size       int
+	size       uint
 }
 
-func NewMinHeap[T Element](comparable func(a, b T) bool) *MinHeap[T] {
+// NewBinaryHeap creates a new binary heap (min heap by default)
+func NewBinaryHeap[T Element](comparable func(a, b T) bool) *BinaryHeap[T] {
 	if comparable == nil {
 		comparable = func(a, b T) bool {
 			return a < b
 		}
 	}
-	return &MinHeap[T]{elements: make([]T, 0), comparable: comparable, size: 0}
+	return &BinaryHeap[T]{elements: make([]T, 0), comparable: comparable, size: 0}
 }
 
-func (heap *MinHeap[T]) Size() int {
+func (heap *BinaryHeap[T]) Size() uint {
 	return heap.size
 }
 
-func (heap *MinHeap[T]) IsEmpty() bool {
+func (heap *BinaryHeap[T]) IsEmpty() bool {
 	return heap.size == 0
 }
 
-func (heap *MinHeap[T]) Peek() (*T, error) {
+func (heap *BinaryHeap[T]) Peek() (*T, error) {
 	if heap.IsEmpty() {
 		return nil, fmt.Errorf("heap is empty")
 	}
 	return &heap.elements[0], nil
 }
 
-func (heap *MinHeap[T]) swap(i, j int) {
+func (heap *BinaryHeap[T]) swap(i, j uint) {
 	heap.elements[i], heap.elements[j] = heap.elements[j], heap.elements[i]
 }
 
-func (heap *MinHeap[T]) Insert(element T) {
+func (heap *BinaryHeap[T]) Insert(element T) {
 	heap.size++
 	heap.elements = append(heap.elements, element)
 	index := heap.size - 1
