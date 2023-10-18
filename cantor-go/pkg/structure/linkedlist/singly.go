@@ -1,18 +1,18 @@
 package linkedlist
 
-type Node[T any] struct {
+type SinglyNode[T any] struct {
 	value T
-	next  *Node[T]
+	next  *SinglyNode[T]
 }
 
 type Singly[T any] struct {
-	head *Node[T]
-	tail *Node[T]
+	head *SinglyNode[T]
+	tail *SinglyNode[T]
 	size uint
 }
 
-func NewNode[T any](value T) *Node[T] {
-	return &Node[T]{value: value, next: nil}
+func NewSinglyNode[T any](value T) *SinglyNode[T] {
+	return &SinglyNode[T]{value: value, next: nil}
 }
 
 // NewSingly creates a new singly linked list
@@ -29,26 +29,24 @@ func (list *Singly[T]) IsEmpty() bool {
 }
 
 func (list *Singly[T]) Append(value T) {
-	newNode := NewNode[T](value)
+	newNode := NewSinglyNode[T](value)
 	if list.IsEmpty() {
 		list.head = newNode
-		list.tail = newNode
 	} else {
 		list.tail.next = newNode
-		list.tail = newNode
 	}
+	list.tail = newNode
 	list.size++
 }
 
 func (list *Singly[T]) Prepend(value T) {
-	newNode := NewNode[T](value)
+	newNode := NewSinglyNode[T](value)
 	if list.IsEmpty() {
-		list.head = newNode
 		list.tail = newNode
 	} else {
 		newNode.next = list.head
-		list.head = newNode
 	}
+	list.head = newNode
 	list.size++
 }
 
