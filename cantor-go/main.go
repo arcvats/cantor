@@ -6,7 +6,7 @@ import (
 )
 
 func main() {
-	newHeap := heap.NewMinHeap[string](func(a, b string) bool {
+	newHeap := heap.NewBinaryHeap[string](func(a, b string) bool {
 		return len(a) < len(b)
 	})
 	newHeap.Insert("hello")
@@ -21,5 +21,21 @@ func main() {
 		fmt.Printf("%v", er)
 		return
 	}
-	fmt.Printf("%v", *ele)
+	fmt.Printf("%v\n", *ele)
+	h := newHeap.Sort()
+	//newHeap.Delete()
+	//ele, er = newHeap.Peek()
+	//fmt.Printf("%v\n", *ele)
+	//
+	//newHeap.Delete()
+	//ele, er = newHeap.Peek()
+	//fmt.Printf("%v\n", *ele)
+	//newHeap.Delete()
+	//ele, er = newHeap.Peek()
+	//fmt.Printf("%v\n", *ele)
+	//newHeap.Delete()
+	//ele, er = newHeap.Peek()
+	//fmt.Printf("%v\n", *ele)
+
+	fmt.Printf("%v\n%v", h, newHeap)
 }
